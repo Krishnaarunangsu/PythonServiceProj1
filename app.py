@@ -4,7 +4,7 @@ Example python app with the Flask framework: http://flask.pocoo.org/
 
 from os import environ
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask import render_template
 
 app = Flask(__name__)
@@ -17,6 +17,43 @@ def index():
     :return:
     """
     return render_template('index.html', powered_by=environ.get('POWERED_BY', 'Deis'))
+
+
+# https://riptutorial.com/flask/example/5831/return-a-json-response-from-flask-api
+@app.route('/api/get-json')
+def hello():
+    return jsonify(hello='world')  # Returns HTTP Response with {"hello": "world"}
+
+
+# https://techtutorialsx.com/2017/01/07/flask-parsing-json-data/
+# https://github.com/deis
+# https://github.com/IBM/python-flask-app/blob/master/Dockerfile
+# https://github.com/digitalocean/sample-flask
+# https://github.com/codefresh-contrib/python-flask-sample-app
+# https://github.com/bradtraversy/myflaskapp
+# https://github.com/bigcommerce/hello-world-app-python-flask
+# https://github.com/XD-DENG/flask-example/blob/master/app.py
+# https://realpython.com/flask-by-example-part-1-project-setup/
+# https://stackoverflow.com/questions/20001229/how-to-get-posted-json-in-flask
+# https://www.digitalocean.com/community/tutorials/processing-incoming-request-data-in-flask
+# https://pythonhosted.org/Flask-JSON/
+# https://pythonbasics.org/flask-rest-api/
+# https://www.kite.com/python/answers/how-to-return-a-json-response-using-flask-in-python
+# https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
+# https://pythonise.com/series/learning-flask/working-with-json-in-flask
+# https://www.geeksforgeeks.org/how-to-return-a-json-object-from-a-python-function/
+
+@app.route('/api/get-person')
+def get_person():
+    person = {'name': 'Alice', 'birth-year': 1986}
+    return jsonify(person)
+
+
+@app.route('/api/get-people')
+def get_people():
+    people = [{'name': 'Alice', 'birth-year': 1986},
+              {'name': 'Bob', 'birth-year': 1985}]
+    return jsonify(people)
 
 
 if __name__ == '__main__':
