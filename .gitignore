@@ -28,3 +28,4 @@ venv
 *.pyc
 .idea
 build
+binary

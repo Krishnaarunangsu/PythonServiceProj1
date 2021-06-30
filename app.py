@@ -4,7 +4,7 @@ Example python app with the Flask framework: http://flask.pocoo.org/
 
 from os import environ
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, url_for, request, json
 from flask import render_template
 
 app = Flask(__name__)
@@ -54,6 +54,71 @@ def get_people():
     people = [{'name': 'Alice', 'birth-year': 1986},
               {'name': 'Bob', 'birth-year': 1985}]
     return jsonify(people)
+
+
+@app.route('/articles')
+def get_api_articles():
+    return "List of " + url_for('get_api_articles')
+
+
+@app.route('/articles/<article_id>')
+def get_api_article(article_id):
+    try:
+        if isinstance(int(article_id), int):
+            print('hu')
+            return "You are reading article " + article_id
+    # return "You are reading article " + str(article_id) ERROR-500 Internal server error
+    except ValueError:
+        return "Article id is not integer"
+
+
+@app.route('/hello')
+def api_hello():
+    """
+
+    :return:
+    """
+    if 'name' in request.args:
+        return 'Hello ' + request.args['name']
+    else:
+        return "John Doe"
+
+
+@app.route('/echo', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_echo():
+    if request.method == 'GET':
+        return "ECHO: GET\n"
+
+    elif request.method == 'POST':
+        return "ECHO: POST\n"
+
+    elif request.method == 'PATCH':
+        return "ECHO: PATCH\n"
+
+    elif request.method == 'PUT':
+        return "ECHO: PUT\n"
+
+    elif request.method == 'DELETE':
+        return "ECHO: DELETE"
+
+
+@app.route('/messages', methods=['POST'])
+def api_message():
+    """
+
+    :return:
+    """
+    if request.headers['Content-Type'] == 'text/plain':
+        return "Text Message: " + request.data
+    elif request.headers['Content-Type'] == 'application/json':
+        return "JSON Message: " + json.dumps(request.json)
+    elif request.headers['Content-Type'] == 'application/octet-stream':
+        f = open('./binary', 'wb')
+        f.write(request.data)
+        f.close()
+        return "Binary Message written"
+    else:
+        return "415 Unsupported Media Type"
 
 
 if __name__ == '__main__':
