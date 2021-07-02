@@ -42,6 +42,12 @@ def hello():
 # https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
 # https://pythonise.com/series/learning-flask/working-with-json-in-flask
 # http://blog.luisrei.com/articles/flaskrest.html
+# https://atmamani.github.io/blog/building-restful-apis-with-flask-in-python/
+# https://realpython.com/flask-connexion-rest-api-part-4/
+# https://realpython.com/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/
+# https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
+# https://nearsoft.com/blog/how-to-create-an-api-and-web-applications-with-flask/
+# https://www.datasciencelearner.com/how-to-create-a-bar-chart-from-a-dataframe-in-python/
 # https://www.geeksforgeeks.org/how-to-return-a-json-object-from-a-python-function/
 
 @app.route('/api/get-person')
@@ -146,14 +152,14 @@ def user_id_not_found(error=None):
     return response
 
 
-@app.route('/users/<user_id>', methods=['GET'])
+@app.route('/users/<int:user_id>', methods=['GET'])
 def get_user_details(user_id):
     """
 
     :param user_id:
     :return: user if id exists else error message
     """
-    users = {'1': 'Ram', '2': 'Krishna', '3': 'Jagannath'}
+    users = {1: 'Ram', '2': 'Krishna', '3': 'Jagannath'}
     if user_id in users:
         # return users[user_id]
         return jsonify({user_id: users[user_id]})
