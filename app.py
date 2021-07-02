@@ -4,7 +4,7 @@ Example python app with the Flask framework: http://flask.pocoo.org/
 import json
 from os import environ
 
-from flask import Flask, jsonify, request, url_for
+from flask import Flask, jsonify, request, url_for, Response
 from flask import render_template
 
 app = Flask(__name__)
@@ -41,6 +41,7 @@ def hello():
 # https://www.kite.com/python/answers/how-to-return-a-json-response-using-flask-in-python
 # https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
 # https://pythonise.com/series/learning-flask/working-with-json-in-flask
+# http://blog.luisrei.com/articles/flaskrest.html
 # https://www.geeksforgeeks.org/how-to-return-a-json-object-from-a-python-function/
 
 @app.route('/api/get-person')
@@ -112,6 +113,52 @@ def api_message():
         return "Binary message written!"
     else:
         return "415 Unsupported Media Type ;)"
+
+
+@app.route('/hello_res', methods=['GET'])
+def get_api_hello_resp():
+    """
+
+    :return:
+    """
+    data = {
+        'hello': 'world',
+        'number': 3
+    }
+    resp_json = json.dumps(data)
+    # response = Response(resp_json, status=200, mimetype='application/json')
+
+    response = jsonify(resp_json)
+    response.status_code = 200
+    response.headers['Link'] = 'http://luisrei.com'
+
+    return response
+
+
+@app.errorhandler(404)
+def user_id_not_found(error=None):
+    error_message = {
+        'status': 404,
+        'message': 'User Id not found:' + request.url
+    }
+    response = jsonify(error_message)
+    response.status_code = 404
+    return response
+
+
+@app.route('/users/<user_id>', methods=['GET'])
+def get_user_details(user_id):
+    """
+
+    :param user_id:
+    :return: user if id exists else error message
+    """
+    users = {'1': 'Ram', '2': 'Krishna', '3': 'Jagannath'}
+    if user_id in users:
+        # return users[user_id]
+        return jsonify({user_id: users[user_id]})
+    else:
+        return user_id_not_found()
 
 
 if __name__ == '__main__':
