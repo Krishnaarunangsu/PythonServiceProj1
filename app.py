@@ -65,6 +65,10 @@ def get_people():
 
 @app.route('/')
 def api_root():
+    """
+    Default Method is GET
+    :return:
+    """
     return 'Welcome'
 
 
