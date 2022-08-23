@@ -3,7 +3,7 @@ Example python app with the Flask framework: http://flask.pocoo.org/
 """
 from os import environ
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, redirect, url_for, request
 from flask import render_template
 
 app = Flask(__name__)
@@ -118,8 +118,34 @@ def add_message7():
                     "status": "SUCCESS"})
 
 
+# login
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        user = request.form['name']
+        if user == "TCG":
+            return redirect(url_for('success', name=user))
+        else:
+            return redirect(url_for('failure', name=user))
+    else:
+        user = request.args.get('nm')
+        return redirect(url_for('failure', name=user))
+
+
+# login success
+@app.route('/success/<name>')
+def success(name):
+    return f'Welcome {name}'
+
+
+# login failure
+@app.route('/failure/<name>')
+def failure(name):
+    return f'Not right Company: {name}'
+
+
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(environ.get('PORT', 5000))
     # app.run(host='0.0.0.0', port=port)
-    app.run()
+    app.run(debug=True)
