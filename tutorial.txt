@@ -1,0 +1,27 @@
+
+
+# https://techtutorialsx.com/2017/01/07/flask-parsing-json-data/
+# https://github.com/deis
+# https://github.com/IBM/python-flask-app/blob/master/Dockerfile
+# https://github.com/digitalocean/sample-flask
+# https://github.com/codefresh-contrib/python-flask-sample-app
+# https://github.com/bradtraversy/myflaskapp
+# https://github.com/bigcommerce/hello-world-app-python-flask
+# https://github.com/XD-DENG/flask-example/blob/master/app.py
+# https://realpython.com/flask-by-example-part-1-project-setup/
+# https://stackoverflow.com/questions/20001229/how-to-get-posted-json-in-flask
+# https://www.digitalocean.com/community/tutorials/processing-incoming-request-data-in-flask
+# https://pythonhosted.org/Flask-JSON/
+# https://pythonbasics.org/flask-rest-api/
+# https://www.kite.com/python/answers/how-to-return-a-json-response-using-flask-in-python
+# https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
+# https://pythonise.com/series/learning-flask/working-with-json-in-flask
+# http://blog.luisrei.com/articles/flaskrest.html
+# https://atmamani.github.io/blog/building-restful-apis-with-flask-in-python/
+# https://realpython.com/flask-connexion-rest-api-part-4/
+# https://realpython.com/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/
+# https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
+# https://nearsoft.com/blog/how-to-create-an-api-and-web-applications-with-flask/
+# https://www.datasciencelearner.com/how-to-create-a-bar-chart-from-a-dataframe-in-python/
+# https://www.geeksforgeeks.org/how-to-return-a-json-object-from-a-python-function/
+# https://riptutorial.com/flask/example/5831/return-a-json-response-from-flask-api
